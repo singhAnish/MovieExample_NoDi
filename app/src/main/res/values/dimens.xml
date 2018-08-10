@@ -1,0 +1,43 @@
+<resources>
+
+    <dimen name="standard_0">0dp</dimen>
+    <dimen name="standard_0.5">0.5dp</dimen>
+    <dimen name="standard_1">1dp</dimen>
+    <dimen name="standard_2">2dp</dimen>
+    <dimen name="standard_4">4dp</dimen>
+    <dimen name="standard_6">6dp</dimen>
+    <dimen name="standard_8">8dp</dimen>
+    <dimen name="standard_10">10dp</dimen>
+    <dimen name="standard_12">12dp</dimen>
+    <dimen name="standard_16">16dp</dimen>
+    <dimen name="standard_20">20dp</dimen>
+    <dimen name="standard_24">24dp</dimen>
+    <dimen name="standard_32">32dp</dimen>
+    <dimen name="standard_36">36dp</dimen>
+    <dimen name="standard_40">40dp</dimen>
+    <dimen name="standard_48">48dp</dimen>
+    <dimen name="standard_56">56dp</dimen>
+    <dimen name="standard_64">64dp</dimen>
+    <dimen name="standard_72">72dp</dimen>
+    <dimen name="standard_80">80dp</dimen>
+    <dimen name="standard_90">90dp</dimen>
+    <dimen name="standard_96">96dp</dimen>
+    <dimen name="standard_116">116dp</dimen>
+    <dimen name="standard_120">120dp</dimen>
+    <dimen name="standard_144">144dp</dimen>
+    <dimen name="standard_164">164dp</dimen>
+    <dimen name="standard_172">172dp</dimen>
+    <dimen name="standard_180">180dp</dimen>
+
+    <!--Will be used for text size-->
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="textSize_13">13sp</dimen>
+    <dimen name="textSize_14">14sp</dimen>
+    <dimen name="textSize_16">16sp</dimen>
+    <dimen name="textSize_15">15sp</dimen>
+    <dimen name="textSize_18">18sp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
+    <dimen name="textSize_24">24sp</dimen>
+    <dimen name="textSize_28">28sp</dimen>
+
+</resources>

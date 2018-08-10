@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Rupeek</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+    <string name="noInternet">Your internet connection is unstable</string>
+    <string name="somethingWrong">Something went wrong, please try later!</string>
+
+
+</resources>
