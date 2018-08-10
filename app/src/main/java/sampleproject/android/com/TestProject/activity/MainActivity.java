@@ -12,29 +12,26 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sampleproject.android.com.TestProject.MyApp;
 import sampleproject.android.com.TestProject.R;
-import sampleproject.android.com.TestProject.adapter.MockyAdapter;
+import sampleproject.android.com.TestProject.activity.MainContract.View;
+import sampleproject.android.com.TestProject.adapter.MainAdapter;
 import sampleproject.android.com.TestProject.base.BaseActivity;
 import sampleproject.android.com.TestProject.interfaces.APIInterface;
-import sampleproject.android.com.TestProject.model.MockyModel;
-import sampleproject.android.com.TestProject.model.MockyModelData;
+import sampleproject.android.com.TestProject.model.MainActivityModel;
+import sampleproject.android.com.TestProject.model.MainActivityModelData;
 import sampleproject.android.com.TestProject.util.ConnectionDetector;
 import sampleproject.android.com.TestProject.util.Local;
 import sampleproject.android.com.TestProject.util.Prefs;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements View {
 
     private MainPresenter mPresenter;
-    private ArrayList<MockyModelData> mModel;
-    private Unbinder unbinder;
-    @BindView(R.id.recyclerView) RecyclerView mRecycler;
+    private ArrayList<MainActivityModelData> mModel;
+    private RecyclerView mRecycler;
 
     @Override
     protected int getContentView() {
@@ -45,25 +42,19 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
         super.onViewReady(savedInstanceState, intent);
         showBackTitle(Local.getString(R.string.app_name));
-        unbinder = ButterKnife.bind(this);
+        mRecycler = findViewById(R.id.recyclerView);
         mPresenter = new MainPresenter(this);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
-    }
-
-    @Override
-    public void initPage() {
+    public void loadFromPrefs() {
         Local.toastStringMessage("Loading data from Prefs");
         String mJsonString = Prefs.getStrPref(Prefs.HOME_PAGE_DATA);
         JsonParser parser = new JsonParser();
-        JsonElement mJson =  parser.parse(mJsonString);
+        JsonElement mJson = parser.parse(mJsonString);
         Gson gson = new Gson();
 
-        MockyModel model = gson.fromJson(mJson, MockyModel.class);
+        MainActivityModel model = gson.fromJson(mJson, MainActivityModel.class);
         if (mModel == null) {
             mModel = new ArrayList<>();
         }
@@ -71,35 +62,34 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void loadContentFromAPI(){
-        Local.toastStringMessage("Loading data from API");
+    public void loadContentFromAPI() {
+        Local.toastStringMessage("First time data loaded from API");
         if (ConnectionDetector.isConnected()) {
             showDialog();
             APIInterface service = MyApp.get().getRetrofit().create(APIInterface.class);
-            Call<MockyModel> call = service.getMovieListData();
-            call.enqueue(new Callback<MockyModel>() {
+            Call<MainActivityModel> call = service.getMovieListData();
+            call.enqueue(new Callback<MainActivityModel>() {
                 @Override
-                public void onResponse(Call<MockyModel> call, Response<MockyModel> response) {
+                public void onResponse(Call<MainActivityModel> call, Response<MainActivityModel> response) {
                     if (response.isSuccessful()) {
                         dismissDialog();
-                        Local.logMessage("url : " + response.raw().request().url());
                         Gson gson = new Gson();
                         String responseData = gson.toJson(response.body());
                         Prefs.setStrPref(Prefs.HOME_PAGE_DATA, responseData);
 
-                        MockyModel movieList = response.body();
+                        MainActivityModel movieList = response.body();
                         if (mModel == null) {
                             mModel = new ArrayList<>();
                         }
                         mModel.addAll(Arrays.asList(movieList.getData()));
-                        mPresenter.updateGridView();
+                        mPresenter.loadGridView();
                     } else {
                         Local.toastMessage(R.string.somethingWrong);
                     }
                 }
 
                 @Override
-                public void onFailure(Call<MockyModel> call, Throwable t) {
+                public void onFailure(Call<MainActivityModel> call, Throwable t) {
                     dismissDialog();
                     t.printStackTrace();
                 }
@@ -109,9 +99,8 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void updateGridView() {
-        GridLayoutManager layoutManager = new GridLayoutManager(MyApp.get().getContext(), 2);
-        mRecycler.setLayoutManager(layoutManager);
-        MockyAdapter mAdapter = new MockyAdapter(mModel);
+        mRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+        MainAdapter mAdapter = new MainAdapter(mModel);
         mRecycler.setAdapter(mAdapter);
     }
 }

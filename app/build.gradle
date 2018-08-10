@@ -25,7 +25,6 @@ android {
 
             buildConfigField("String", "BASE_URL", "\"http://www.mocky.io/v2/\"")
             buildConfigField("String", "KEY", "\"5b3f68793400005a02001aba\"")
-
         }
     }
 }
@@ -46,26 +45,23 @@ dependencies {
     implementation "com.android.support:support-v13:${rootProject.buildToolsVersion}"
     implementation "com.android.support:multidex:1.0.3"
 
-
     //Network Call
     implementation ('com.squareup.retrofit2:retrofit:2.1.0') {
         exclude module: 'okhttp' // exclude Retrofit’s OkHttp dependency module and define your own module import
     }
 
     //Images
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
     //gson Libs
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
-    //ButterKnife
-    implementation "com.jakewharton:butterknife:8.8.1"
-    //annotationProcessor "com.jakewharton:butterknife-compiler:8.8.1"
-
     //Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Image Downloader
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
 
 }

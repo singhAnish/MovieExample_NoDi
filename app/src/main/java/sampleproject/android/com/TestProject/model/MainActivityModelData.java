@@ -3,21 +3,8 @@ package sampleproject.android.com.TestProject.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MockyModelData implements Parcelable {
-    public static final Creator<MockyModelData> CREATOR = new Creator<MockyModelData>() {
-        @Override
-        public MockyModelData createFromParcel(Parcel source) {
-            MockyModelData var = new MockyModelData();
-            var.place = source.readString();
-            var.url = source.readString();
-            return var;
-        }
+public class MainActivityModelData implements Parcelable {
 
-        @Override
-        public MockyModelData[] newArray(int size) {
-            return new MockyModelData[size];
-        }
-    };
     private String place;
     private String url;
 
@@ -47,4 +34,19 @@ public class MockyModelData implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public static final Creator<MainActivityModelData> CREATOR = new Creator<MainActivityModelData>() {
+        @Override
+        public MainActivityModelData createFromParcel(Parcel source) {
+            MainActivityModelData var = new MainActivityModelData();
+            var.place = source.readString();
+            var.url = source.readString();
+            return var;
+        }
+
+        @Override
+        public MainActivityModelData[] newArray(int size) {
+            return new MainActivityModelData[size];
+        }
+    };
 }

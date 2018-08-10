@@ -9,7 +9,7 @@ public class Prefs {
     public final static String HOME_PAGE_DATA = "home_page_data";
 
     private static SharedPreferences getPrefs() {
-        return MyApp.get().getContext().getSharedPreferences("RUPEEK_PREFS", Context.MODE_PRIVATE);
+        return MyApp.get().getContext().getSharedPreferences("MVP_TEST_PREFS", Context.MODE_PRIVATE);
     }
 
     public static boolean contains(String key) {

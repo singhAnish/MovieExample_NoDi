@@ -15,33 +15,34 @@ import java.util.List;
 
 import sampleproject.android.com.TestProject.MyApp;
 import sampleproject.android.com.TestProject.R;
-import sampleproject.android.com.TestProject.model.MockyModelData;
+import sampleproject.android.com.TestProject.model.MainActivityModelData;
 
-public class MockyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<MockyModelData> mModel;
+    private List<MainActivityModelData> mModel;
 
-    public MockyAdapter(List<MockyModelData> model) {
+    public MainAdapter(List<MainActivityModelData> model) {
         this.mModel = model;
     }
 
     @Override @NonNull
-    public MockyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_place, parent, false);
-        return new MockyAdapter.MyViewHolder(itemView);
+        return new MainAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder itemHolder, int position) {
         MyViewHolder holder = (MyViewHolder) itemHolder;
-        final MockyModelData model = mModel.get(position);
+        final MainActivityModelData model = mModel.get(position);
         holder.placeName.setText(model.getPlace());
 
         Glide.with(MyApp.get().getContext()).load(model.getUrl())
-                .thumbnail(0.05f)
+                .thumbnail(0.05f)//it will download 5% quality of image followed by original image(Progressive image for better user experience)
                 .placeholder(R.drawable.ic_launcher_background).error(R.drawable.ic_launcher_background)
-                .fallback(R.drawable.ic_launcher_background)
-                .diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(holder.placeImage);
+                .fallback(R.drawable.ic_launcher_background)// In case when something goes wrong
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//It will cache the Image
+                .crossFade().into(holder.placeImage);
     }
 
     @Override
