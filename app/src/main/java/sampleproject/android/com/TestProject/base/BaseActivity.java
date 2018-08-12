@@ -1,6 +1,7 @@
 package sampleproject.android.com.TestProject.base;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -13,7 +14,7 @@ import android.widget.FrameLayout;
 import sampleproject.android.com.TestProject.R;
 import sampleproject.android.com.TestProject.util.Local;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView {
 
     private Toolbar toolbar;
     private ProgressDialog mDialog;
@@ -34,7 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         onViewReady(savedInstanceState, getIntent());
     }
 
@@ -45,28 +45,47 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getContentView();
 
-    protected void showDialog(){
-        if(mDialog == null){
-            mDialog = new ProgressDialog(this);
-            mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mDialog.setCancelable(true);
-            mDialog.setCanceledOnTouchOutside(false);
-        }
-        mDialog.show();
+    @Override
+    public Context getContext() {
+        return this;
     }
 
-    protected void dismissDialog(){
-        if(mDialog != null && mDialog.isShowing()){
-            mDialog.dismiss();
-        }
-    }
-
-    protected void showBackTitle(String title) {
+    @Override
+    public void showBackTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
         toolbar.setTitle(title);
+    }
+
+    @Override
+    public void showDialog() {
+        if (mDialog == null) {
+            mDialog = new ProgressDialog(getContext());
+            mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mDialog.setMessage("Loading...");
+            mDialog.setCancelable(true);
+            mDialog.setCanceledOnTouchOutside(false);
+        }
+        mDialog.show();
+    }
+
+    @Override
+    public void dismissDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showToast(int id) {
+        Local.toastMessage(id);
+    }
+
+    @Override
+    public void showStringToast(String message) {
+        Local.toastStringMessage(message);
     }
 }

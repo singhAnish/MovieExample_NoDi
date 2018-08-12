@@ -47,8 +47,19 @@ public class MainActivity extends BaseActivity implements View {
     }
 
     @Override
+    public void onPause() {
+        mPresenter.onViewInactive();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.onViewActive(this);
+    }
+
+    @Override
     public void loadFromPrefs() {
-        Local.toastStringMessage("Loading data from Prefs");
         String mJsonString = Prefs.getStrPref(Prefs.HOME_PAGE_DATA);
         JsonParser parser = new JsonParser();
         JsonElement mJson = parser.parse(mJsonString);
@@ -63,7 +74,6 @@ public class MainActivity extends BaseActivity implements View {
 
     @Override
     public void loadContentFromAPI() {
-        Local.toastStringMessage("First time data loaded from API");
         if (ConnectionDetector.isConnected()) {
             showDialog();
             APIInterface service = MyApp.get().getRetrofit().create(APIInterface.class);
@@ -84,7 +94,7 @@ public class MainActivity extends BaseActivity implements View {
                         mModel.addAll(Arrays.asList(movieList.getData()));
                         mPresenter.loadGridView();
                     } else {
-                        Local.toastMessage(R.string.somethingWrong);
+                        showToast(R.string.somethingWrong);
                     }
                 }
 
@@ -99,7 +109,7 @@ public class MainActivity extends BaseActivity implements View {
 
     @Override
     public void updateGridView() {
-        mRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+        mRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
         MainAdapter mAdapter = new MainAdapter(mModel);
         mRecycler.setAdapter(mAdapter);
     }

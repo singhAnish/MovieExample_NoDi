@@ -13,6 +13,9 @@ public interface MainContract {
 
     //Presenter Interface for MainActivity
     interface Presenter{
+
+        void loadData();
+
         void loadGridView();
     }
 }
