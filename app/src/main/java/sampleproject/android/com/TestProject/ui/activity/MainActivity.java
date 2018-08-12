@@ -1,4 +1,4 @@
-package sampleproject.android.com.TestProject.activity;
+package sampleproject.android.com.TestProject.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,15 +17,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sampleproject.android.com.TestProject.MyApp;
 import sampleproject.android.com.TestProject.R;
-import sampleproject.android.com.TestProject.activity.MainContract.View;
 import sampleproject.android.com.TestProject.adapter.MainAdapter;
-import sampleproject.android.com.TestProject.base.BaseActivity;
-import sampleproject.android.com.TestProject.interfaces.APIInterface;
+import sampleproject.android.com.TestProject.contract.MainContract.View;
 import sampleproject.android.com.TestProject.model.MainActivityModel;
 import sampleproject.android.com.TestProject.model.MainActivityModelData;
+import sampleproject.android.com.TestProject.presenter.MainPresenter;
 import sampleproject.android.com.TestProject.util.ConnectionDetector;
 import sampleproject.android.com.TestProject.util.Local;
 import sampleproject.android.com.TestProject.util.Prefs;
+import sampleproject.android.com.TestProject.util.apiInterface.APIInterface;
+import sampleproject.android.com.TestProject.util.base.BaseActivity;
 
 public class MainActivity extends BaseActivity implements View {
 

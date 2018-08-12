@@ -1,9 +1,9 @@
-package sampleproject.android.com.TestProject.activity;
+package sampleproject.android.com.TestProject.presenter;
 
-import sampleproject.android.com.TestProject.activity.MainContract.Presenter;
-import sampleproject.android.com.TestProject.activity.MainContract.View;
-import sampleproject.android.com.TestProject.base.BasePresenter;
+import sampleproject.android.com.TestProject.contract.MainContract.Presenter;
+import sampleproject.android.com.TestProject.contract.MainContract.View;
 import sampleproject.android.com.TestProject.util.Prefs;
+import sampleproject.android.com.TestProject.util.base.BasePresenter;
 
 public class MainPresenter extends BasePresenter<View> implements Presenter {
 

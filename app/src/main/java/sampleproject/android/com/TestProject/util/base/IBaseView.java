@@ -1,4 +1,4 @@
-package sampleproject.android.com.TestProject.base;
+package sampleproject.android.com.TestProject.util.base;
 
 
 import android.content.Context;

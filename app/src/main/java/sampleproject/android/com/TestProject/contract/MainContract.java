@@ -1,4 +1,4 @@
-package sampleproject.android.com.TestProject.activity;
+package sampleproject.android.com.TestProject.contract;
 
 public interface MainContract {
 

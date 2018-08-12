@@ -1,4 +1,4 @@
-package sampleproject.android.com.TestProject.interfaces;
+package sampleproject.android.com.TestProject.util.apiInterface;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
