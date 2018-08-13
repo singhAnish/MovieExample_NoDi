@@ -15,26 +15,26 @@ import java.util.List;
 
 import sampleproject.android.com.TestProject.MyApp;
 import sampleproject.android.com.TestProject.R;
-import sampleproject.android.com.TestProject.model.MainActivityModelData;
+import sampleproject.android.com.TestProject.model.WonderActivityModelData;
 
-public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class WonderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private List<MainActivityModelData> mModel;
+    private List<WonderActivityModelData> mModel;
 
-    public MainAdapter(List<MainActivityModelData> model) {
-        this.mModel = model;
+    public WonderAdapter() {
+        this.mModel  = MyApp.get().getDatabase().wonderDao().getWonderData();
     }
 
     @Override @NonNull
-    public MainAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public WonderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_place, parent, false);
-        return new MainAdapter.MyViewHolder(itemView);
+        return new WonderAdapter.MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder itemHolder, int position) {
         MyViewHolder holder = (MyViewHolder) itemHolder;
-        final MainActivityModelData model = mModel.get(position);
+        final WonderActivityModelData model = mModel.get(position);
         holder.placeName.setText(model.getPlace());
 
         Glide.with(MyApp.get().getContext()).load(model.getUrl())
@@ -53,7 +53,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private class MyViewHolder extends RecyclerView.ViewHolder {
         private final TextView placeName;
         private final ImageView placeImage;
-
         private MyViewHolder(View view) {
             super(view);
             placeName = view.findViewById(R.id.placeName);

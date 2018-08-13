@@ -85,7 +85,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
-    public void showStringToast(String message) {
+    public void showToast(String message) {
         Local.toastStringMessage(message);
     }
 }

@@ -56,13 +56,16 @@ dependencies {
 
     //gson Libs
     implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
 
     //Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     //Image Downloader
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+
+    implementation "android.arch.persistence.room:runtime:${rootProject.room_version}"
+    annotationProcessor "android.arch.persistence.room:compiler:${rootProject.room_version}"
 
 }
 

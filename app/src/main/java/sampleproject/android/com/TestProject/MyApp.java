@@ -1,6 +1,7 @@
 package sampleproject.android.com.TestProject;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -8,6 +9,7 @@ import android.net.ConnectivityManager;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import sampleproject.android.com.TestProject.database.AppDatabase;
 import sampleproject.android.com.TestProject.util.ConnectionDetector;
 import sampleproject.android.com.TestProject.util.RetrofitInstance;
 import timber.log.Timber;
@@ -16,6 +18,8 @@ public class MyApp extends Application {
 
     private static MyApp mInstance;
     private OkHttpClient okHttpClient;
+    private AppDatabase db;
+
 
     @Override
     public void onCreate() {
@@ -35,6 +39,11 @@ public class MyApp extends Application {
         });
 
         okHttpClient = new OkHttpClient.Builder().addInterceptor(loggingInterceptor).build();
+
+
+        db = Room.databaseBuilder(getContext(), AppDatabase.class, "Development")
+                .allowMainThreadQueries()
+                .build();
     }
 
     public static synchronized MyApp get() {
@@ -51,5 +60,9 @@ public class MyApp extends Application {
 
     public Context getContext(){
         return mInstance;
+    }
+
+    public AppDatabase getDatabase(){
+        return  db;
     }
 }

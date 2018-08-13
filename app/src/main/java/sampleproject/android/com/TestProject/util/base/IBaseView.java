@@ -11,7 +11,7 @@ public interface IBaseView {
 
     void showToast(int msgID);
 
-    void showStringToast(String msg);
+    void showToast(String msg);
 
     Context getContext();
 

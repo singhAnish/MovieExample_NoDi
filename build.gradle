@@ -15,6 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven{ url 'https://maven.google.com'}
     }
 }
 
@@ -37,5 +38,6 @@ ext {
     testImplementationVersion = "1.0.1"
     constraintLayoutVersion = '1.1.2'
     glideVersion = '3.8.0'
+    room_version = "1.1.1"
 
 }

@@ -1,17 +1,15 @@
 package sampleproject.android.com.TestProject.contract;
 
-public interface MainContract {
+public interface WonderContract {
 
-    //View Interface for MainActivity
+    //View Interface for WonderActivity
     interface View {
-        void loadFromPrefs();
-
         void loadContentFromAPI();
 
         void updateGridView();
     }
 
-    //Presenter Interface for MainActivity
+    //Presenter Interface for WonderActivity
     interface Presenter{
 
         void loadData();
