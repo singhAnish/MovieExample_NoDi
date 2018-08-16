@@ -64,9 +64,11 @@ public class WonderActivity extends BaseActivity implements View {
                 public void onResponse(Call<WonderActivityModel> call, Response<WonderActivityModel> response) {
                     if (response.isSuccessful()) {
                         dismissDialog();
+                        MyApp.get().getDatabase().wonderDao().clearWonderData();
+
                         WonderActivityModel movieList = response.body();
-                        ArrayList<WonderActivityModelData> mModel  = new ArrayList<>(Arrays.asList(movieList.getData()));
-                        for(int i = 0; i < mModel.size() ; i++){
+                        ArrayList<WonderActivityModelData> mModel = new ArrayList<>(Arrays.asList(movieList.getData()));
+                        for (int i = 0; i < mModel.size(); i++) {
                             MyApp.get().getDatabase().wonderDao().insertWonderData(mModel.get(i));
                         }
                         mPresenter.loadGridView();

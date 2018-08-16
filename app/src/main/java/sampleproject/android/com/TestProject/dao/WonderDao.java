@@ -16,4 +16,7 @@ public interface WonderDao {
 
     @Insert
     void insertWonderData(WonderActivityModelData... model);
+
+    @Query("DELETE FROM WonderActivityModelData")
+    void clearWonderData();
 }

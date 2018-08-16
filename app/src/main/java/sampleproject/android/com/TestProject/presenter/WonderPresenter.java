@@ -22,6 +22,7 @@ public class WonderPresenter extends BasePresenter<View> implements Presenter {
         } else {
             view.loadContentFromAPI();
         }
+        //view.loadContentFromAPI();
     }
 
     @Override
